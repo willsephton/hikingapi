@@ -7,6 +7,9 @@ services:
       - "3000:3000"
     depends_on:
       - mysql
+    deploy:
+      restart_policy:
+        condition: unless-stopped
 
   mysql:
     image: mysql:5.7
