@@ -48,7 +48,14 @@ function startServer() {
   app.use(bodyParser.json());
 
   // Routes
-  // Example: Get all users
+
+  // View
+app.get('/', (req,res)=> {
+	res.render("index");
+});
+
+
+  // Get all users
   app.get('/obstructions', (req, res) => {
     const sql = 'SELECT * FROM obstructions';
     db.query(sql, (err, result) => {
