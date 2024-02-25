@@ -53,7 +53,7 @@ function startServer() {
 
 
   app.get('/', (req, res) => {
-    res.render('public/index');
+    res.render('index');
   });
   
 
