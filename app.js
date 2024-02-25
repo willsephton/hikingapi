@@ -4,9 +4,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-
-app.set('view engine', 'ejs');
-
 // MySQL Connection Configuration
 const dbConfig = {
   host: 'mysql', // docker-compose service name
@@ -54,7 +51,7 @@ function startServer() {
 
   // View
 app.get('/', (req,res)=> {
-	res.render("index");
+	res.render("public/index.html");
 });
 
 
