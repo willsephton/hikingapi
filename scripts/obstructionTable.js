@@ -87,9 +87,8 @@ function displayEditPopup(obstruction) {
     document.body.insertAdjacentHTML('beforeend', popupHtml);
 }
 
-function submitForm() {
+function submitEditForm(obstructionId) {
     // Get input values
-    var obstructionId = document.getElementById('obstructionId').value;
     var type = document.getElementById('type').value;
     var longitude = document.getElementById('longitude').value;
     var latitude = document.getElementById('latitude').value;
@@ -128,6 +127,5 @@ function submitForm() {
         alert('Failed to update obstruction. Please try again.');
     });
 }
-
 
 fetchAndDisplayObstructions();
