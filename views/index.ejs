@@ -7,12 +7,26 @@
             height: 400px;
             width: 100%;
         }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
     <h1>Hiking Obstructions Dashboard</h1>
     <div id="map"></div>
+    <div id="obstructionsTable"></div>
     <script src="/scripts/map.js"></script>
+    <script src="/scripts/obstructionTable.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgxu1LuvU8yS3qv5f0KsX1PDV1tNX4v8E&callback=initMap" async defer></script>
 </body>
 </html>

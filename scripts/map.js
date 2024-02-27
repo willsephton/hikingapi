@@ -22,3 +22,5 @@ function initMap() {
             console.error('Error fetching obstructions:', error);
         });
 }
+
+
