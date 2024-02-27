@@ -46,7 +46,7 @@ function submitForm() {
     };
 
     // Send POST request
-    fetch('/add-obstruction', {
+    fetch('/createObstruction', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
