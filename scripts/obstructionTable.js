@@ -1,3 +1,5 @@
+javascript
+Copy code
 function fetchAndDisplayObstructions() {
     fetch('/obstructions')
         .then(response => response.json())
@@ -23,7 +25,11 @@ function fetchAndDisplayObstructions() {
                 const row = document.createElement('tr');
                 headers.forEach(header => {
                     const td = document.createElement('td');
-                    td.textContent = obstruction[header];
+                    if (header === 'date') {
+                        td.textContent = formatDate(obstruction[header]);
+                    } else {
+                        td.textContent = obstruction[header];
+                    }
                     row.appendChild(td);
                 });
                 // Add edit button
@@ -53,6 +59,12 @@ function fetchAndDisplayObstructions() {
         .catch(error => {
             console.error('Error fetching obstructions:', error);
         });
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    return formattedDate;
 }
 
 function displayEditPopup(obstruction) {
