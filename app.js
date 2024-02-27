@@ -87,6 +87,44 @@ function startServer() {
     });
   });
 
+
+    // Edit an existing obstruction
+  app.post('/editObstruction/:id', (req, res) => {
+    const { type, longitude, latitude, date, trail } = req.body;
+    const id = req.params.id;
+    const sql = 'UPDATE obstructions SET type = ?, longitude = ?, latitude = ?, date = ?, trail = ? WHERE id = ?';
+    db.query(sql, [type, longitude, latitude, date, trail, id], (err, result) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      if (result.affectedRows === 0) {
+        res.status(404).json({ message: 'Obstruction not found' });
+        return;
+      }
+      res.json({ message: 'Obstruction updated successfully', id: id });
+    });
+  });
+
+  // Delete an obstruction
+  app.delete('/deleteObstruction/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = 'DELETE FROM obstructions WHERE id = ?';
+    db.query(sql, id, (err, result) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      if (result.affectedRows === 0) {
+        res.status(404).json({ message: 'Obstruction not found' });
+        return;
+      }
+      res.json({ message: 'Obstruction deleted successfully', id: id });
+    });
+  });
+
+
+
   // Route to set up the database schema
   app.get('/setup-database', (req, res) => {
     // SQL query to create the obstructions table
