@@ -19,12 +19,39 @@
         th {
             background-color: #f2f2f2;
         }
+        .popup-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .input-field {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>Hiking Obstructions Dashboard</h1>
+    <button class="btn" onclick="showPopup()">Add Obstruction</button>
     <div id="map"></div>
     <div id="obstructionsTable"></div>
+    <script src="/scripts/createObstruction.js"></script>
     <script src="/scripts/map.js"></script>
     <script src="/scripts/obstructionTable.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgxu1LuvU8yS3qv5f0KsX1PDV1tNX4v8E&callback=initMap" async defer></script>
