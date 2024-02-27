@@ -49,6 +49,7 @@ function connectDatabase() {
 function startServer() {
   // Middleware
   app.use(bodyParser.json());
+  app.use('/scripts', express.static('scripts')); // Serve static files from 'scripts' directory
 
   // Routes
 
