@@ -49,3 +49,11 @@ header{
     padding: 10px;
     border-radius: 20px;
 }
+th{
+    background-color: #669900;
+    color: white;
+}
+tr{
+    background-color: #2c4200;
+    color: white;
+}
