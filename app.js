@@ -134,7 +134,7 @@ function startServer() {
         type VARCHAR(255) NOT NULL,
         longitude DECIMAL(10, 6) NOT NULL,
         latitude DECIMAL(10, 6) NOT NULL,
-        date DATE NOT NULL,
+        date DATETIME NOT NULL,
         trail VARCHAR(255) NOT NULL
       )
     `;
