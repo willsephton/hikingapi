@@ -39,15 +39,28 @@ th {
     border-radius: 4px;
     cursor: pointer;
 }
-h1{
-    font-family: "Roboto", sans-serif;
-    color: white;
-    text-align: center;
-}
-header{
+header {
     background-color: #669900;
     padding: 10px;
     border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    font-family: "Roboto", sans-serif;
+    color: white;
+    text-align: center;
+    margin-left: 10px; /* Adjust the margin between the logo and the h1 */
+}
+img {
+    width: 50px;
 }
 th{
     font-family: "Roboto", sans-serif;
