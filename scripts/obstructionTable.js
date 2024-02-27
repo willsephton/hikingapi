@@ -39,9 +39,7 @@ function fetchAndDisplayObstructions() {
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.onclick = () => {
-                    // Implement delete functionality here
-                    // You can use the obstruction object to get the ID or other details
-                    console.log('Delete clicked for obstruction:', obstruction);
+                    deleteObstruction(obstruction.id); // Call function to delete obstruction
                 };
                 const deleteCell = document.createElement('td');
                 deleteCell.appendChild(deleteButton);
@@ -125,6 +123,27 @@ function submitEditForm(obstructionId) {
     .catch(error => {
         console.error('Error:', error);
         alert('Failed to update obstruction. Please try again.');
+    });
+}
+
+function deleteObstruction(obstructionId) {
+    // Send DELETE request to delete obstruction
+    fetch(`/deleteObstruction/${obstructionId}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Obstruction deleted successfully!');
+            // Refresh the obstructions table after deletion
+            document.getElementById('obstructionsTable').innerHTML = '';
+            fetchAndDisplayObstructions();
+        } else {
+            throw new Error('Failed to delete obstruction');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to delete obstruction. Please try again.');
     });
 }
 
