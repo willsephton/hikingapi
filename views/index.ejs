@@ -12,14 +12,22 @@
 <body>
     <h1>Google Maps Example</h1>
     <div id="map"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQEfxPRRLZFM0YMAHuAqxLoD35oj6Ptww&callback=initMap"
-        async defer></script>
     <script>
         function initMap() {
-            fetch('/map').then(response => response.text()).then(html => {
-                document.getElementById('map').innerHTML = html;
+            // Initialize the map
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+            });
+
+            // Example marker
+            const marker = new google.maps.Marker({
+                position: { lat: -34.397, lng: 150.644 },
+                map: map,
+                title: 'Marker'
             });
         }
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgxu1LuvU8yS3qv5f0KsX1PDV1tNX4v8E&callback=initMap" async defer></script>
 </body>
 </html>

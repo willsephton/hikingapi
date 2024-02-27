@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const { Loader } = require('@googlemaps/js-api-loader');
 
 const app = express();
 
@@ -41,6 +42,8 @@ function connectDatabase() {
     }
   });
 }
+
+
 
 // Function to start the Express server
 function startServer() {
