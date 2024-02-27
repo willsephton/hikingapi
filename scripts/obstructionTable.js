@@ -87,8 +87,9 @@ function displayEditPopup(obstruction) {
     document.body.insertAdjacentHTML('beforeend', popupHtml);
 }
 
-function submitEditForm(obstructionId) {
+function submitForm() {
     // Get input values
+    var obstructionId = document.getElementById('obstructionId').value;
     var type = document.getElementById('type').value;
     var longitude = document.getElementById('longitude').value;
     var latitude = document.getElementById('latitude').value;
@@ -106,7 +107,7 @@ function submitEditForm(obstructionId) {
     };
 
     // Send POST request to update obstruction
-    fetch('/editObstruction', {
+    fetch(`/editObstruction/${obstructionId}`, { // Include ID in the URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -127,5 +128,6 @@ function submitEditForm(obstructionId) {
         alert('Failed to update obstruction. Please try again.');
     });
 }
+
 
 fetchAndDisplayObstructions();
