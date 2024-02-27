@@ -1,5 +1,3 @@
-javascript
-Copy code
 function fetchAndDisplayObstructions() {
     fetch('/obstructions')
         .then(response => response.json())
