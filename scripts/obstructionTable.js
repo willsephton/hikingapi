@@ -10,6 +10,13 @@ function fetchAndDisplayObstructions() {
                 th.textContent = header;
                 headerRow.appendChild(th);
             });
+            // Add headers for edit and delete buttons
+            const editHeader = document.createElement('th');
+            editHeader.textContent = 'Edit';
+            headerRow.appendChild(editHeader);
+            const deleteHeader = document.createElement('th');
+            deleteHeader.textContent = 'Delete';
+            headerRow.appendChild(deleteHeader);
             table.appendChild(headerRow);
 
             obstructions.forEach(obstruction => {
@@ -23,18 +30,35 @@ function fetchAndDisplayObstructions() {
                     }
                     row.appendChild(td);
                 });
+                // Add edit button
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.onclick = () => {
+                    displayEditPopup(obstruction); // Call function to display edit popup with obstruction data
+                };
+                const editCell = document.createElement('td');
+                editCell.appendChild(editButton);
+                row.appendChild(editCell);
+                // Add delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => {
+                    deleteObstruction(obstruction.id); // Call function to delete obstruction
+                };
+                const deleteCell = document.createElement('td');
+                deleteCell.appendChild(deleteButton);
+                row.appendChild(deleteCell);
+
                 table.appendChild(row);
             });
 
-            // Replace the existing obstructions table with the new one
-            const existingTable = document.getElementById('obstructionsTable');
-            existingTable.innerHTML = ''; // Clear existing content
-            existingTable.appendChild(table);
+            document.getElementById('obstructionsTable').appendChild(table);
         })
         .catch(error => {
             console.error('Error fetching obstructions:', error);
         });
 }
+
 function formatDate(dateString) {
     const date = new Date(dateString);
     const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
@@ -66,10 +90,6 @@ function displayEditPopup(obstruction) {
             <label for="trail">Trail:</label>
             <input type="text" id="trail" name="trail" value="${obstruction.trail}">
         </div>
-        <div class="input-field">
-            <label for="approval">Approval:</label>
-            <input type="checkbox" id="approval" name="approval" ${obstruction.approval ? 'checked' : ''}>
-        </div>
         <button class="btn" onclick="submitEditForm(${obstruction.id})">Submit</button>
     </div>`;
     document.body.insertAdjacentHTML('beforeend', popupHtml);
@@ -82,7 +102,6 @@ function submitEditForm(obstructionId) {
     var latitude = document.getElementById('latitude').value;
     var date = document.getElementById('date').value;
     var trail = document.getElementById('trail').value;
-    var approval = document.getElementById('approval').checked; // Get the approval status from the checkbox
 
     // Construct JSON object
     var data = {
@@ -91,8 +110,7 @@ function submitEditForm(obstructionId) {
         "longitude": longitude,
         "latitude": latitude,
         "date": date,
-        "trail": trail,
-        "approval": approval // Include approval status in the data
+        "trail": trail
     };
 
     // Send POST request to update obstruction
