@@ -72,3 +72,8 @@ tr{
     background-color: #2c4200;
     color: white;
 }
+.login-text {
+    margin-left: auto; /* Pushes the "Login" text to the right side */
+    font-family: "Roboto", sans-serif;
+    color: white;
+}
