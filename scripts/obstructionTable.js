@@ -10,13 +10,6 @@ function fetchAndDisplayObstructions() {
                 th.textContent = header;
                 headerRow.appendChild(th);
             });
-            // Add headers for edit and delete buttons
-            const editHeader = document.createElement('th');
-            editHeader.textContent = 'Edit';
-            headerRow.appendChild(editHeader);
-            const deleteHeader = document.createElement('th');
-            deleteHeader.textContent = 'Delete';
-            headerRow.appendChild(deleteHeader);
             table.appendChild(headerRow);
 
             obstructions.forEach(obstruction => {
@@ -30,35 +23,18 @@ function fetchAndDisplayObstructions() {
                     }
                     row.appendChild(td);
                 });
-                // Add edit button
-                const editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
-                editButton.onclick = () => {
-                    displayEditPopup(obstruction); // Call function to display edit popup with obstruction data
-                };
-                const editCell = document.createElement('td');
-                editCell.appendChild(editButton);
-                row.appendChild(editCell);
-                // Add delete button
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.onclick = () => {
-                    deleteObstruction(obstruction.id); // Call function to delete obstruction
-                };
-                const deleteCell = document.createElement('td');
-                deleteCell.appendChild(deleteButton);
-                row.appendChild(deleteCell);
-
                 table.appendChild(row);
             });
 
-            document.getElementById('obstructionsTable').appendChild(table);
+            // Replace the existing obstructions table with the new one
+            const existingTable = document.getElementById('obstructionsTable');
+            existingTable.innerHTML = ''; // Clear existing content
+            existingTable.appendChild(table);
         })
         .catch(error => {
             console.error('Error fetching obstructions:', error);
         });
 }
-
 function formatDate(dateString) {
     const date = new Date(dateString);
     const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
