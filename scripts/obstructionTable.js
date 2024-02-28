@@ -100,9 +100,11 @@ function displayEditPopup(obstruction) {
             <input type="checkbox" id="approval" name="approval" ${obstruction.approval ? 'checked' : ''}>
         </div>
         <button class="btn" onclick="submitEditForm(${obstruction.id})">Submit</button>
+        <button class="btn close-btn" onclick="closePopup()">Close</button>
     </div>`;
     document.body.insertAdjacentHTML('beforeend', popupHtml);
 }
+
 
 function submitEditForm(obstructionId) {
     // Get input values
@@ -170,5 +172,10 @@ function deleteObstruction(obstructionId) {
         alert('Failed to delete obstruction. Please try again.');
     });
 }
+
+function closePopup() {
+    document.querySelector('.popup-container').remove();
+}
+
 
 fetchAndDisplayObstructions();

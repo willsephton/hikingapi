@@ -16,16 +16,25 @@ function showPopup() {
         </div>
         <div class="input-field">
             <label for="date">Date:</label>
-            <input type="date" id="date" name="date">
+            <input type="datetime-local" id="date" name="date">
         </div>
         <div class="input-field">
             <label for="trail">Trail:</label>
             <input type="text" id="trail" name="trail">
         </div>
+        <div class="input-field">
+            <label for="approval">Approval:</label>
+            <input type="checkbox" id="approval" name="approval">
+        </div>
         <button class="btn" onclick="submitForm()">Submit</button>
+        <button class="btn close-btn" onclick="closePopup()">Close</button>
     </div>`;
 
     document.body.insertAdjacentHTML('beforeend', popupHtml);
+}
+
+function closePopup() {
+    document.querySelector('.popup-container').remove();
 }
 
 function submitForm() {
@@ -66,5 +75,5 @@ function submitForm() {
     });
 
     // Close the popup after submitting the form
-    document.querySelector('.popup-container').remove();
+    closePopup();
 }
