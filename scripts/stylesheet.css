@@ -59,7 +59,7 @@ h1 {
     color: white;
     text-align: center;
     margin-left: 10px; /* Adjust the margin between the logo and the h1 */
-    margin-right: 10px; /* Adjust the margin between the h1 and the login text */
+    margin-right: auto; /* Adjust the margin between the h1 and the login text */
 }
 
 .login-text {
