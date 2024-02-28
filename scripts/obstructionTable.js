@@ -61,8 +61,13 @@ function fetchAndDisplayObstructions() {
 
 function formatDate(dateString) {
     const date = new Date(dateString);
-    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-    return formattedDate;
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 }
 
 function displayEditPopup(obstruction) {
@@ -84,7 +89,7 @@ function displayEditPopup(obstruction) {
         </div>
         <div class="input-field">
             <label for="date">Date:</label>
-            <input type="date" id="date" name="date" value="${obstruction.date}">
+            <input type="datetime-local" id="date" name="date" value="${formatDate(obstruction.date)}">
         </div>
         <div class="input-field">
             <label for="trail">Trail:</label>
