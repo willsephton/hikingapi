@@ -39,12 +39,13 @@ th {
     border-radius: 4px;
     cursor: pointer;
 }
+
 header {
     background-color: #669900;
     padding: 10px;
     border-radius: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -67,8 +68,8 @@ h1 {
 .login-text {
     font-family: "Roboto", sans-serif;
     color: white;
-    margin-right: 10px;
 }
+
 
 th{
     font-family: "Roboto", sans-serif;
