@@ -111,6 +111,10 @@ function submitEditForm(obstructionId) {
     var latitude = document.getElementById('latitude').value;
     var date = document.getElementById('date').value;
     var trail = document.getElementById('trail').value;
+    var approval = document.getElementById('approval').checked; // Get checkbox value
+
+    // Convert date to the desired format
+    var formattedDate = new Date(date).toISOString();
 
     // Construct JSON object
     var data = {
@@ -118,8 +122,9 @@ function submitEditForm(obstructionId) {
         "type": type,
         "longitude": longitude,
         "latitude": latitude,
-        "date": date,
-        "trail": trail
+        "date": formattedDate,
+        "trail": trail,
+        "approval": approval
     };
 
     // Send POST request to update obstruction
