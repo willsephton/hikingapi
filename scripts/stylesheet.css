@@ -45,7 +45,7 @@ header {
     padding: 10px;
     border-radius: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Aligns items with space between them */
     align-items: center;
 }
 
@@ -68,7 +68,9 @@ h1 {
 .login-text {
     font-family: "Roboto", sans-serif;
     color: white;
+    margin-right: 20px; /* Adjust this margin to move the text further to the right */
 }
+
 
 
 th{
