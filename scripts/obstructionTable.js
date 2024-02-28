@@ -90,6 +90,10 @@ function displayEditPopup(obstruction) {
             <label for="trail">Trail:</label>
             <input type="text" id="trail" name="trail" value="${obstruction.trail}">
         </div>
+        <div class="input-field">
+            <label for="approval">Approval:</label>
+            <input type="checkbox" id="approval" name="approval" ${obstruction.approval ? 'checked' : ''}>
+        </div>
         <button class="btn" onclick="submitEditForm(${obstruction.id})">Submit</button>
     </div>`;
     document.body.insertAdjacentHTML('beforeend', popupHtml);
@@ -102,6 +106,7 @@ function submitEditForm(obstructionId) {
     var latitude = document.getElementById('latitude').value;
     var date = document.getElementById('date').value;
     var trail = document.getElementById('trail').value;
+    var approval = document.getElementById('approval').checked; // Get the approval status from the checkbox
 
     // Construct JSON object
     var data = {
@@ -110,7 +115,8 @@ function submitEditForm(obstructionId) {
         "longitude": longitude,
         "latitude": latitude,
         "date": date,
-        "trail": trail
+        "trail": trail,
+        "approval": approval // Include approval status in the data
     };
 
     // Send POST request to update obstruction
