@@ -44,6 +44,7 @@ function submitForm() {
     var latitude = document.getElementById('latitude').value;
     var date = document.getElementById('date').value;
     var trail = document.getElementById('trail').value;
+    var approval = document.getElementById('approval').checked; // Get checkbox value
 
     // Construct JSON object
     var data = {
@@ -51,7 +52,8 @@ function submitForm() {
         "longitude": longitude,
         "latitude": latitude,
         "date": date,
-        "trail": trail
+        "trail": trail,
+        "approval": approval // Include approval value in the data object
     };
 
     // Send POST request
