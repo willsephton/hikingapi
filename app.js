@@ -135,7 +135,8 @@ function startServer() {
         longitude DECIMAL(10, 6) NOT NULL,
         latitude DECIMAL(10, 6) NOT NULL,
         date VARCHAR(255) NOT NULL,
-        trail VARCHAR(255) NOT NULL
+        trail VARCHAR(255) NOT NULL,
+        approval BOOLEAN DEFAULT false
       )
     `;
   
