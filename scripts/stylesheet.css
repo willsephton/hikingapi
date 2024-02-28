@@ -44,7 +44,7 @@ header {
     padding: 10px;
     border-radius: 20px;
     display: flex;
-    justify-content: space-between; /* Align items with space between them */
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -57,19 +57,19 @@ h1 {
     font-family: "Roboto", sans-serif;
     color: white;
     text-align: center;
-    margin: 0; /* Remove default margin */
+    margin: 0;
+}
+
+.logo-container img {
+    width: 50px;
 }
 
 .login-text {
-    color: white;
     font-family: "Roboto", sans-serif;
-    margin-right: 10px; /* Adjust the margin between the title and the "Login" text */
+    color: white;
+    margin-right: 10px;
 }
 
-
-img {
-    width: 50px;
-}
 th{
     font-family: "Roboto", sans-serif;
     background-color: #669900;
