@@ -44,29 +44,29 @@ header {
     padding: 10px;
     border-radius: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center content horizontally */
     align-items: center;
 }
 
 .logo-container {
-    flex-grow: 1; /* Allow the logo and title to occupy remaining space */
     display: flex;
     align-items: center;
+    margin-right: auto; /* Pushes the login text to the right */
 }
 
 h1 {
-    flex-grow: 0; /* Prevent the title from growing */
     font-family: "Roboto", sans-serif;
     color: white;
     text-align: center;
     margin-left: 10px; /* Adjust the margin between the logo and the h1 */
+    margin-right: 10px; /* Adjust the margin between the h1 and the login text */
 }
 
 .login-text {
     color: white;
-    margin-right: 10px; /* Adjust the margin between the title and the login text */
     font-family: "Roboto", sans-serif;
 }
+
 img {
     width: 50px;
 }
