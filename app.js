@@ -11,7 +11,7 @@ const dbConfig = {
   user: 'username',
   password: 'password',
   database: 'obstructions',
-  insecureAuth : true
+  insecureAuth: true
 };
 
 let db;
@@ -43,8 +43,6 @@ function connectDatabase() {
   });
 }
 
-
-
 // Function to start the Express server
 function startServer() {
   // Middleware
@@ -52,15 +50,11 @@ function startServer() {
   app.use('/scripts', express.static('scripts')); // Serve static files from 'scripts' directory
 
   // Routes
-
   app.set('view engine', 'ejs');
-
 
   app.get('/', (req, res) => {
     res.render('index');
   });
-  
-
 
   // Get all users
   app.get('/obstructions', (req, res) => {
@@ -74,11 +68,11 @@ function startServer() {
     });
   });
 
-  // Example: Create a new user
+  // Create a new obstruction
   app.post('/createObstruction', (req, res) => {
-    const { type, longitude, latitude, date, trail } = req.body;
-    const sql = 'INSERT INTO obstructions (type, longitude, latitude, date, trail) VALUES (?, ?, ?, ?, ?)';
-    db.query(sql, [type, longitude, latitude, date, trail], (err, result) => {
+    const { type, longitude, latitude, date, trail, approval } = req.body;
+    const sql = 'INSERT INTO obstructions (type, longitude, latitude, date, trail, approval) VALUES (?, ?, ?, ?, ?, ?)';
+    db.query(sql, [type, longitude, latitude, date, trail, approval], (err, result) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
@@ -87,13 +81,12 @@ function startServer() {
     });
   });
 
-
-    // Edit an existing obstruction
+  // Edit an existing obstruction
   app.post('/editObstruction/:id', (req, res) => {
-    const { type, longitude, latitude, date, trail } = req.body;
+    const { type, longitude, latitude, date, trail, approval } = req.body;
     const id = req.params.id;
-    const sql = 'UPDATE obstructions SET type = ?, longitude = ?, latitude = ?, date = ?, trail = ? WHERE id = ?';
-    db.query(sql, [type, longitude, latitude, date, trail, id], (err, result) => {
+    const sql = 'UPDATE obstructions SET type = ?, longitude = ?, latitude = ?, date = ?, trail = ?, approval = ? WHERE id = ?';
+    db.query(sql, [type, longitude, latitude, date, trail, approval, id], (err, result) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
@@ -123,8 +116,6 @@ function startServer() {
     });
   });
 
-
-
   // Route to set up the database schema
   app.get('/setup-database', (req, res) => {
     // SQL query to create the obstructions table
@@ -139,7 +130,7 @@ function startServer() {
         approval BOOLEAN DEFAULT false
       )
     `;
-  
+
     // Execute the SQL query
     db.query(createObstructionsTable, (err, result) => {
       if (err) {
