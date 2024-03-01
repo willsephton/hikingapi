@@ -44,7 +44,7 @@ header {
     padding: 10px;
     border-radius: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Align items on both ends */
     align-items: center;
 }
 
@@ -53,6 +53,9 @@ header {
     align-items: center;
 }
 
+.login-container {
+    margin-left: auto; /* Push the login container to the right */
+}
 h1 {
     font-family: "Roboto", sans-serif;
     color: white;
