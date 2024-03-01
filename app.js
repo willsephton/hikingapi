@@ -60,7 +60,7 @@ function startServer() {
   // Routes
   app.set('view engine', 'ejs');
 
-  app.get('/dashboard', requireLogin, (req, res) => {
+  app.get('/dashboard', requireAdmin, (req, res) => {
     res.render('index');
   });
 
@@ -205,6 +205,16 @@ app.post('/createUser', async (req, res) => {
 function requireLogin(req, res, next) {
   if (!req.session.user) {
     res.status(401).json({ error: 'Unauthorized, please login' });
+  } else {
+    next();
+  }
+}
+
+// Middleware to check if user is authenticated and admin
+function requireAdmin(req, res, next) {
+  const user = req.session.user;
+  if (!user || user.admin !== 1) {
+    res.status(401).json({ error: 'Unauthorized, admin privileges required' });
   } else {
     next();
   }
