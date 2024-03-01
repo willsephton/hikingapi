@@ -161,7 +161,9 @@ function startServer() {
         latitude DECIMAL(10, 6) NOT NULL,
         date VARCHAR(255) NOT NULL,
         trail VARCHAR(255) NOT NULL,
-        approval BOOLEAN DEFAULT false
+        approval BOOLEAN DEFAULT false,
+        username VARCHAR(255) NOT NULL,
+        description VARCHAR(255) NOT NULL
       )
     `;
 
@@ -188,7 +190,8 @@ app.get('/setup-database-users', (req, res) => {
       id INT AUTO_INCREMENT PRIMARY KEY,
       username VARCHAR(255) NOT NULL,
       password VARCHAR(255) NOT NULL,
-      admin BOOLEAN DEFAULT false
+      admin BOOLEAN DEFAULT false,
+      date DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `;
 

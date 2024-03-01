@@ -33,3 +33,7 @@
   #login-form input, #login-btn {
     margin-bottom: 10px;
   }
+
+  img {
+    width: 50px;
+}
