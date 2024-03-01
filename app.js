@@ -2,6 +2,8 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const { Loader } = require('@googlemaps/js-api-loader');
+const session = require('express-session');
+
 
 const app = express();
 
@@ -15,6 +17,12 @@ const dbConfig = {
 };
 
 let db;
+
+app.use(session({
+  secret: 'your-secret-key', // Secret key used to sign the session ID cookie
+  resave: false,
+  saveUninitialized: false
+}));
 
 function connectDatabase() {
   db = mysql.createConnection(dbConfig);
@@ -52,7 +60,7 @@ function startServer() {
   // Routes
   app.set('view engine', 'ejs');
 
-  app.get('/dashboard', (req, res) => {
+  app.get('/dashboard', requireLogin, (req, res) => {
     res.render('index');
   });
 
@@ -193,6 +201,15 @@ app.post('/createUser', async (req, res) => {
 });
 
 
+// Middleware to check if user is authenticated
+function requireLogin(req, res, next) {
+  if (!req.session.user) {
+    res.status(401).json({ error: 'Unauthorized, please login' });
+  } else {
+    next();
+  }
+}
+
 // Login route
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
@@ -222,11 +239,25 @@ app.post('/login', async (req, res) => {
       }
 
       // Passwords match, user is authenticated
+      // Store user information in session
+      req.session.user = { id: user.id, username: user.username };
       res.json({ message: 'Login successful', user: { id: user.id, username: user.username } });
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+
+// Logout route
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    } else {
+      res.send('Logged out successfully');
+    }
+  });
 });
 
 // Delete user route
