@@ -229,6 +229,24 @@ app.post('/login', async (req, res) => {
   }
 });
 
+// Delete user route
+app.delete('/deleteUser/:id', (req, res) => {
+  const userId = req.params.id;
+
+  const sql = 'DELETE FROM users WHERE id = ?';
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    if (result.affectedRows === 0) {
+      res.status(404).json({ error: 'User not found' });
+      return;
+    }
+    res.json({ message: 'User deleted successfully' });
+  });
+});
+
 
  // Get all users
  app.get('/users', (req, res) => {
