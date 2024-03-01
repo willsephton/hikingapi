@@ -104,7 +104,7 @@ function startServer() {
 
   // Create a new obstruction
   app.post('/createObstruction', (req, res) => {
-    const { type, longitude, latitude, date, trail, approval } = req.body;
+    const { type, longitude, latitude, date, trail, approval, username, description } = req.body;
     const sql = 'INSERT INTO obstructions (type, longitude, latitude, date, trail, approval, username, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     db.query(sql, [type, longitude, latitude, date, trail, approval, username, description], (err, result) => {
       if (err) {
