@@ -4,19 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Form</title>
+  <link rel="stylesheet" href="scripts/login.css">
 </head>
 <body>
 
-<div id="login-form">
-  <h2>Login</h2>
-  <form id="login-form" action="#">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username"><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
-    <button type="button" id="login-btn">Login</button>
-  </form>
-</div>
+    <div class="container">
+        <div class="banner">
+          <img src="scripts/logo.png" alt="Logo">
+          <h1>PathProtector Dashboard</h1>
+        </div>
+      
+        <div id="login-form">
+          <h2>Login</h2>
+          <form action="#" method="POST">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <button type="button" id="login-btn">Login</button>
+          </form>
+        </div>
+      </div>
 
 
 <script>
