@@ -198,7 +198,11 @@ app.post('/login', async (req, res) => {
   const sql = 'SELECT * FROM users WHERE username = ?';
   
   try {
+    console.log('Executing SQL query:', sql);
+    console.log('Query parameters:', [username]);
     const [user] = await db.query(sql, [username]);
+    console.log('Query result:', user);
+
     
     if (!user) {
       res.status(401).json({ message: 'Invalid username or password' });
