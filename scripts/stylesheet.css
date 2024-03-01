@@ -79,3 +79,7 @@ tr{
     background-color: #2c4200;
     color: white;
 }
+
+a {
+    text-decoration: none; /* Remove text decoration from all links */
+}
