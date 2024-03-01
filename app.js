@@ -56,7 +56,7 @@ function startServer() {
     res.render('index');
   });
 
-  // Get all users
+  // Get all obstructions
   app.get('/obstructions', (req, res) => {
     const sql = 'SELECT * FROM obstructions';
     db.query(sql, (err, result) => {
@@ -145,7 +145,7 @@ function startServer() {
 //! User Database Stuff
 
 // Route to set up the users table
-app.get('/setup-databse-users', (req, res) => {
+app.get('/setup-database-users', (req, res) => {
   // SQL query to create the users table
   const createUsersTable = `
     CREATE TABLE IF NOT EXISTS users (
@@ -199,6 +199,18 @@ app.post('/login', (req, res) => {
   });
 });
 
+
+ // Get all users
+ app.get('/users', (req, res) => {
+  const sql = 'SELECT * FROM users';
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(result);
+  });
+});
 
 
   // Start server
