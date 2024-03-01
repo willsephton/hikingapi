@@ -144,6 +144,8 @@ function startServer() {
 
 //! User Database Stuff
 
+const bcrypt = require('bcrypt');
+
 // Route to set up the users table
 app.get('/setup-database-users', (req, res) => {
   // SQL query to create the users table
@@ -168,37 +170,53 @@ app.get('/setup-database-users', (req, res) => {
 
 
 // Create a new user
-app.post('/createUser', (req, res) => {
+app.post('/createUser', async (req, res) => {
   const { username, password, admin } = req.body;
-  const sql = 'INSERT INTO users (username, password, admin) VALUES (?, ?, ?)';
-  db.query(sql, [username, password, admin || false], (err, result) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json({ message: 'User created successfully', id: result.insertId });
-  });
+  
+  try {
+    // Generate a salt
+    const salt = await bcrypt.genSalt(10);
+    // Hash the password using the salt
+    const hashedPassword = await bcrypt.hash(password, salt);
+    
+    const sql = 'INSERT INTO users (username, password, admin) VALUES (?, ?, ?)';
+    db.query(sql, [username, hashedPassword, admin || false], (err, result) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ message: 'User created successfully', id: result.insertId });
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
-
 // Login route
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
-  db.query(sql, [username, password], (err, results) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    if (results.length === 0) {
+  const sql = 'SELECT * FROM users WHERE username = ?';
+  
+  try {
+    const [user] = await db.query(sql, [username]);
+    
+    if (!user) {
       res.status(401).json({ message: 'Invalid username or password' });
       return;
     }
-    // User found, you can implement further logic here like creating a session or generating JWT token
-    res.json({ message: 'Login successful', user: results[0] });
-  });
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    
+    if (!isPasswordValid) {
+      res.status(401).json({ message: 'Invalid username or password' });
+      return;
+    }
+    
+    res.json({ message: 'Login successful', user });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
-
 
  // Get all users
  app.get('/users', (req, res) => {
