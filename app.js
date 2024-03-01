@@ -191,33 +191,31 @@ app.post('/createUser', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.post('/login', (req, res) => {
+
+
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   const sql = 'SELECT * FROM users WHERE username = ?';
   
-  db.query(sql, [username])
-    .then(([user]) => {
-      if (!user) {
-        res.status(401).json({ message: 'Invalid username or password' });
-        return;
-      }
-      
-      bcrypt.compare(password, user.password)
-        .then(isPasswordValid => {
-          if (!isPasswordValid) {
-            res.status(401).json({ message: 'Invalid username or password' });
-            return;
-          }
-          
-          res.json({ message: 'Login successful', user });
-        })
-        .catch(error => {
-          res.status(500).json({ error: error.message });
-        });
-    })
-    .catch(error => {
-      res.status(500).json({ error: error.message });
-    });
+  try {
+    const [user] = await db.query(sql, [username]);
+    
+    if (!user) {
+      res.status(401).json({ message: 'Invalid username or password' });
+      return;
+    }
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    
+    if (!isPasswordValid) {
+      res.status(401).json({ message: 'Invalid username or password' });
+      return;
+    }
+    
+    res.json({ message: 'Login successful', user });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 
