@@ -141,6 +141,66 @@ function startServer() {
     });
   });
 
+
+//! User Database Stuff
+
+// Route to set up the users table
+app.get('/setup-databse-users', (req, res) => {
+  // SQL query to create the users table
+  const createUsersTable = `
+    CREATE TABLE IF NOT EXISTS users (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      username VARCHAR(255) NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      admin BOOLEAN DEFAULT false
+    )
+  `;
+
+  // Execute the SQL query
+  db.query(createUsersTable, (err, result) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ message: 'Users table setup completed' });
+  });
+});
+
+
+// Create a new user
+app.post('/createUser', (req, res) => {
+  const { username, password, admin } = req.body;
+  const sql = 'INSERT INTO users (username, password, admin) VALUES (?, ?, ?)';
+  db.query(sql, [username, password, admin || false], (err, result) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ message: 'User created successfully', id: result.insertId });
+  });
+});
+
+
+// Login route
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
+  db.query(sql, [username, password], (err, results) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(401).json({ message: 'Invalid username or password' });
+      return;
+    }
+    // User found, you can implement further logic here like creating a session or generating JWT token
+    res.json({ message: 'Login successful', user: results[0] });
+  });
+});
+
+
+
   // Start server
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
