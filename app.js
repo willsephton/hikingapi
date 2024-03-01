@@ -82,6 +82,10 @@ function startServer() {
   // Routes
   app.set('view engine', 'ejs');
 
+  app.get('/', (req, res) => {
+    res.render('login');
+  });
+
   app.get('/dashboard', requireAdmin, (req, res) => {
     res.render('index');
   });
