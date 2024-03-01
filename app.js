@@ -24,6 +24,28 @@ app.use(session({
   saveUninitialized: false
 }));
 
+
+
+// Middleware to check if user is authenticated
+function requireLogin(req, res, next) {
+  if (!req.session.user) {
+    res.status(401).json({ error: 'Unauthorized, please login' });
+  } else {
+    next();
+  }
+}
+
+// Middleware to check if user is authenticated and admin
+function requireAdmin(req, res, next) {
+  const user = req.session.user;
+  if (!user || user.admin !== 1) {
+    res.status(401).json({ error: 'Unauthorized, admin privileges required' });
+  } else {
+    next();
+  }
+}
+
+
 function connectDatabase() {
   db = mysql.createConnection(dbConfig);
 
@@ -199,26 +221,6 @@ app.post('/createUser', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-
-// Middleware to check if user is authenticated
-function requireLogin(req, res, next) {
-  if (!req.session.user) {
-    res.status(401).json({ error: 'Unauthorized, please login' });
-  } else {
-    next();
-  }
-}
-
-// Middleware to check if user is authenticated and admin
-function requireAdmin(req, res, next) {
-  const user = req.session.user;
-  if (!user || user.admin !== 1) {
-    res.status(401).json({ error: 'Unauthorized, admin privileges required' });
-  } else {
-    next();
-  }
-}
 
 // Login route
 app.post('/login', async (req, res) => {
