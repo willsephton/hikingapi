@@ -4,21 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Form</title>
-  <style>
-    /* Add your CSS styles for the dialog box here */
-    .dialog-box {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-    }
-  </style>
 </head>
 <body>
 
@@ -33,41 +18,37 @@
   </form>
 </div>
 
-<!-- Dialog box container -->
-<div id="dialog-box" class="dialog-box"></div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Event listener for login button
-    document.getElementById('login-btn').addEventListener('click', function() {
-      // Get input values
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
-      
-      // Display input values in dialog box
-      var dialogContent = '<p>Username: ' + username + '</p><p>Password: ' + password + '</p>';
-      document.getElementById('dialog-box').innerHTML = dialogContent;
-      
-      // AJAX request using fetch API
-      fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username: username, password: password })
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Handle successful login response
-        console.log(data);
-      })
-      .catch(error => {
-        // Handle error
-        console.error('Error:', error);
+      document.getElementById('login-btn').addEventListener('click', function() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        
+        var dialogContent = '<p>Username: ' + username + '</p><p>Password: ' + password + '</p>';
+        document.getElementById('dialog-box').innerHTML = dialogContent;
+        
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username: username, password: password })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Login failed');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data);
+          window.location.href = '/dashboard'; // Redirect to dashboard on successful login
+        })
+        .catch(error => {
+          console.error(error);
+        });
       });
-    });
-  });
-</script>
+  </script>
 
 </body>
 </html>
