@@ -193,30 +193,37 @@ app.post('/createUser', async (req, res) => {
 });
 
 
+// Login route
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const sql = 'SELECT * FROM users WHERE username = ?';
   
   try {
-    console.log('Executing SQL query:', sql);
-    console.log('Query parameters:', [username]);
-    const user = await db.query(sql, [username]);
-    console.log('Query result:', user);
+    // Retrieve user from the database by username
+    const sql = 'SELECT * FROM users WHERE username = ?';
+    db.query(sql, [username], async (err, results) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
 
-    
-    if (!user) {
-      res.status(401).json({ message: 'Invalid username or password' });
-      return;
-    }
-    
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    
-    if (!isPasswordValid) {
-      res.status(401).json({ message: 'Invalid username or password' });
-      return;
-    }
-    
-    res.json({ message: 'Login successful', user });
+      if (results.length === 0) {
+        res.status(401).json({ error: 'Invalid username or password' });
+        return;
+      }
+
+      const user = results[0];
+
+      // Compare the provided password with the hashed password stored in the database
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (!passwordMatch) {
+        res.status(401).json({ error: 'Invalid username or password' });
+        return;
+      }
+
+      // Passwords match, user is authenticated
+      res.json({ message: 'Login successful', user: { id: user.id, username: user.username } });
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
