@@ -200,7 +200,7 @@ app.post('/login', async (req, res) => {
   try {
     console.log('Executing SQL query:', sql);
     console.log('Query parameters:', [username]);
-    const [user] = await db.query(sql, [username]);
+    const user = await db.query(sql, [username]);
     console.log('Query result:', user);
 
     
