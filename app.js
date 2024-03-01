@@ -252,7 +252,7 @@ app.post('/login', async (req, res) => {
 
       // Passwords match, user is authenticated
       // Store user information in session
-      req.session.user = { id: user.id, username: user.username };
+      req.session.user = { id: user.id, username: user.username, admin: user.admin };
       res.json({ message: 'Login successful', user: { id: user.id, username: user.username } });
     });
   } catch (error) {
