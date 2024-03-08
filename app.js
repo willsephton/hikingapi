@@ -209,25 +209,40 @@ app.get('/setup-database-users', (req, res) => {
 // Create a new user
 app.post('/createUser', async (req, res) => {
   const { username, password, admin } = req.body;
-  
-  try {
-    // Generate a salt
-    const salt = await bcrypt.genSalt(10);
-    // Hash the password using the salt
-    const hashedPassword = await bcrypt.hash(password, salt);
-    
-    const sql = 'INSERT INTO users (username, password, admin) VALUES (?, ?, ?)';
-    db.query(sql, [username, hashedPassword, admin || false], (err, result) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json({ message: 'User created successfully', id: result.insertId });
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+
+  // Check if the username already exists
+  const checkUsernameQuery = 'SELECT * FROM users WHERE username = ?';
+  db.query(checkUsernameQuery, [username], async (err, result) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+
+    if (result.length > 0) {
+      res.status(400).json({ error: 'Username already exists' });
+      return;
+    }
+
+    try {
+      // Generate a salt
+      const salt = await bcrypt.genSalt(10);
+      // Hash the password using the salt
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      const sql = 'INSERT INTO users (username, password, admin) VALUES (?, ?, ?)';
+      db.query(sql, [username, hashedPassword, admin || false], (err, result) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+        }
+        res.json({ message: 'User created successfully', id: result.insertId });
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 });
+
 
 // Login route
 app.post('/login', async (req, res) => {
@@ -294,6 +309,26 @@ app.delete('/deleteUser/:id', (req, res) => {
       return;
     }
     res.json({ message: 'User deleted successfully' });
+  });
+});
+
+// Find a user by username
+app.get('/user/:username', (req, res) => {
+  const username = req.params.username;
+
+  const sql = 'SELECT * FROM users WHERE username = ?';
+  db.query(sql, [username], (err, result) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+
+    if (result.length === 0) {
+      res.status(404).json({ error: 'User not found' });
+      return;
+    }
+
+    res.json(result[0]); // Assuming there's only one user with a unique username
   });
 });
 
