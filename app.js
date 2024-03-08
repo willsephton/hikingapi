@@ -210,6 +210,12 @@ app.get('/setup-database-users', (req, res) => {
 app.post('/createUser', async (req, res) => {
   const { username, password, admin } = req.body;
 
+  // Check if username or password is null
+  if (!username || !password) {
+    res.status(422).json({ error: 'Username and password are required' });
+    return;
+  }
+
   // Check if the username already exists
   const checkUsernameQuery = 'SELECT * FROM users WHERE username = ?';
   db.query(checkUsernameQuery, [username], async (err, result) => {
@@ -219,7 +225,7 @@ app.post('/createUser', async (req, res) => {
     }
 
     if (result.length > 0) {
-      res.status(400).json({ error: 'Username already exists' });
+      res.status(409).json({ error: 'Username already exists' });
       return;
     }
 
@@ -235,7 +241,7 @@ app.post('/createUser', async (req, res) => {
           res.status(500).json({ error: err.message });
           return;
         }
-        res.json({ message: 'User created successfully', id: result.insertId });
+        res.status(201).json({ message: 'User created successfully', id: result.insertId });
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
