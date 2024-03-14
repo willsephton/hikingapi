@@ -113,7 +113,7 @@ function submitEditForm(obstructionId) {
     var latitude = document.getElementById('latitude').value;
     var date = document.getElementById('date').value;
     var trail = document.getElementById('trail').value;
-    var approval = document.getElementById('approval').checked; // Get checkbox value
+    var approval = document.getElementById('approval').checked;
 
     // Convert date to the desired format
     var formattedDate = new Date(date).toISOString();
