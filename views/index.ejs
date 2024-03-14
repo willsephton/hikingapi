@@ -19,8 +19,12 @@
             <img src="scripts/logo.png" alt="Logo" class="w-10 mr-2">
             <h1 class="text-white text-lg font-bold">PathProtector Dashboard</h1>
         </div>
-        <div class="text-white font-semibold">
-            <a href="/logout">Logout</a>
+        <div class="flex items-center space-x-4">
+            <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+                onclick="showPopup()">Add Obstruction</button>
+            <div class="text-white font-semibold">
+                <a href="/logout">Logout</a>
+            </div>
         </div>
     </header>
 
@@ -33,9 +37,6 @@
                 <!-- Table will be dynamically populated using JavaScript -->
             </div>
         </div>
-
-        <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-4"
-            onclick="showPopup()">Add Obstruction</button>
 
     </main>
 
