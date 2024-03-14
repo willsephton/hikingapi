@@ -9,30 +9,20 @@
     <!-- Include Tailwind CSS from CDN -->
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body>
 
-    <div class="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <div class="text-center">
-            <img src="scripts/logo.png" alt="Logo" class="mx-auto w-20 mb-4">
-            <h1 class="text-xl font-bold mb-4">PathProtector Dashboard</h1>
-        </div>
+    <div class="container">
+        <img src="scripts/logo.png" alt="Logo" class="logo">
+        <h1 class="title">PathProtector Dashboard</h1>
 
         <div id="login-form">
             <h2 class="text-lg font-bold mb-4">Login</h2>
             <form action="#" method="POST">
-                <div class="mb-4">
-                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username:</label>
-                    <input type="text" id="username" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password:</label>
-                    <input type="password" id="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div class="flex items-center justify-between">
-                    <button type="button" id="login-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Login
-                    </button>
-                </div>
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" id="username" name="username" class="form-input" placeholder="Enter your username">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password">
+                <button type="button" id="login-btn" class="btn-login">Login</button>
             </form>
         </div>
     </div>

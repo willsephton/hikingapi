@@ -1,39 +1,64 @@
-/* Styles for the container */
+body {
+  background-color: #edf2f7;
+}
+
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
+  max-width: 28rem;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem;
+  padding: 2rem;
+  margin: auto;
+  margin-top: 4rem;
+}
 
-  /* Styles for the banner */
-  .banner {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+.logo {
+  display: block;
+  margin: auto;
+  width: 5rem;
+  margin-bottom: 1rem;
+}
 
-  /* Styles for the header */
-  .header {
-    background-color: #4CAF50; /* Green */
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-  }
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-  /* Styles for the login form */
-  #login-form {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+  font-size: 0.875rem;
+}
 
-  /* Styles for the inputs and button */
-  #login-form input, #login-btn {
-    margin-bottom: 10px;
-  }
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
+}
 
-  img {
-    width: 50px;
+.form-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.btn-login {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4299e1;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #2c5282;
 }
