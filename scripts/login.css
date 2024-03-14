@@ -8,7 +8,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('mapLogin.png');
+  background-image: url('scripts/mapLogin.png');
   background-size: cover;
   filter: blur(10px);
 }
