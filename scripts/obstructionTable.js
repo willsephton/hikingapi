@@ -33,6 +33,7 @@ function fetchAndDisplayObstructions() {
                 // Add edit button
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit';
+                editButton.classList.add('btn', 'btn-blue', 'btn-sm'); // Adding Tailwind CSS classes
                 editButton.onclick = () => {
                     displayEditPopup(obstruction); // Call function to display edit popup with obstruction data
                 };
@@ -42,6 +43,7 @@ function fetchAndDisplayObstructions() {
                 // Add delete button
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
+                deleteButton.classList.add('btn', 'btn-red', 'btn-sm'); // Adding Tailwind CSS classes
                 deleteButton.onclick = () => {
                     deleteObstruction(obstruction.id); // Call function to delete obstruction
                 };
