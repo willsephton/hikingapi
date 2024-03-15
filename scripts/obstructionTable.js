@@ -7,7 +7,7 @@ function fetchAndDisplayObstructions() {
             const headerRow = document.createElement('tr');
             headers.forEach(header => {
                 const th = document.createElement('th');
-                th.textContent = header;
+                th.textContent = capitalizeFirstLetter(header); // Capitalize the first letter of the header
                 headerRow.appendChild(th);
             });
             // Add headers for edit and delete buttons
@@ -179,5 +179,8 @@ function closePopup() {
     document.querySelector('.popup-container').remove();
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 fetchAndDisplayObstructions();
