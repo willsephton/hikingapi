@@ -7,7 +7,7 @@ body {
 
 /* Header Styles */
 header {
-    background-color: #48bb78;
+    background-color: #669900;
 }
 
 /* Table Styles */
@@ -22,7 +22,7 @@ th, td {
 }
 
 th {
-    background-color: #48bb78;
+    background-color: #669900;
     color: #ffffff;
     text-align: left;
 }
@@ -36,6 +36,7 @@ th {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
+    border: 3px solid #48bb78;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
