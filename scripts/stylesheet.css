@@ -62,3 +62,7 @@ th {
         grid-template-columns: 1fr;
     }
 }
+
+#map{
+    height: 160rem;
+}
