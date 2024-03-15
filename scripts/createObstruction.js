@@ -26,6 +26,14 @@ function showPopup() {
             <label for="approval">Approval:</label>
             <input type="checkbox" id="approval" name="approval">
         </div>
+        <div class="input-field">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div class="input-field">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
         <button class="btn" onclick="submitForm()">Submit</button>
         <button class="btn close-btn" onclick="closePopup()">Close</button>
     </div>`;
@@ -45,6 +53,8 @@ function submitForm() {
     var date = document.getElementById('date').value;
     var trail = document.getElementById('trail').value;
     var approval = document.getElementById('approval').checked; // Get checkbox value
+    var username = document.getElementById('username').value;
+    var description = document.getElementById('description').value;
 
     // Construct JSON object
     var data = {
@@ -53,9 +63,11 @@ function submitForm() {
         "latitude": latitude,
         "date": date,
         "trail": trail,
-        "approval": approval // Include approval value in the data object
+        "approval": approval,
+        "username": username,
+        "description": description
     };
-
+    
     // Send POST request
     fetch('/createObstruction', {
         method: 'POST',
