@@ -76,7 +76,7 @@ function displayEditPopup(obstruction) {
     // Display the edit popup with pre-filled data from the obstruction object
     const popupHtml = `
     <div class="popup-container">
-        <h2>Edit Obstruction</h2>
+        <h2 class="popupTitle">Edit Obstruction</h2>
         <div class="input-field">
             <label for="type">Type:</label>
             <input type="text" id="type" name="type" value="${obstruction.type}">

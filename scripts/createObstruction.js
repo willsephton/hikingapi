@@ -1,7 +1,7 @@
 function showPopup() {
     const popupHtml = `
     <div class="popup-container">
-        <h2>Add Obstruction</h2>
+        <h2 class="popupTitle">Add Obstruction</h2>
         <div class="input-field">
             <label for="type">Type:</label>
             <input type="text" id="type" name="type">
@@ -67,7 +67,7 @@ function submitForm() {
         "username": username,
         "description": description
     };
-    
+
     // Send POST request
     fetch('/createObstruction', {
         method: 'POST',

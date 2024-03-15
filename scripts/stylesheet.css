@@ -64,5 +64,11 @@ th {
 }
 
 #map{
-    height: 160rem;
+    height: 40rem;
+}
+
+.popupTitle{
+    text-align: center; 
+    font-size: 1.2em; 
+    font-weight: bold;
 }
