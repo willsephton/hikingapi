@@ -31,6 +31,8 @@ th {
     position: fixed;
     top: 50%;
     left: 50%;
+    width: 80%; /* Adjusted width to 80% of the viewport width */
+    max-height: 80%; /* Set maximum height to 80% of the viewport height */
     transform: translate(-50%, -50%);
     background-color: rgba(102, 153, 0, 0.99);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
@@ -39,7 +41,9 @@ th {
     padding: 2rem;
     z-index: 1000;
     max-width: 28rem;
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
 }
+
 
 .input-field {
     margin-bottom: 20px;
