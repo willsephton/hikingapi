@@ -50,20 +50,19 @@ th {
 }
 
 .input-field label {
-    display: block;
-    margin-bottom: 0.5rem;
+    display: inline-block; /* Change display to inline-block */
+    width: 30%; /* Set width for the labels */
+    margin-right: 10px; /* Add margin to separate labels from inputs */
     color: white; /* Same color as the form labels in the login screen */
     font-size: 0.875rem; /* Same font size as the form labels in the login screen */
 }
 
 .input-field input,
 .input-field textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border-radius: 0.375rem;
-    border: 1px solid #e2e8f0;
-    margin-bottom: 1rem;
-    transition: border-color 0.3s ease;
+    width: 65%; /* Set width for the input fields */
+    display: inline-block; /* Change display to inline-block */
+    margin-bottom: 10px; /* Add margin to separate inputs */
+    vertical-align: top; /* Align inputs with the top of the labels */
 }
 
 .input-field input:focus,
