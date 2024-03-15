@@ -1,50 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PathProtector Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="styles/stylesheet.css" rel="stylesheet">
+    <link href="scripts/stylesheet.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anybody&family=Julius+Sans+One&family=K2D:wght@500&family=Permanent+Marker&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rock+Salt&display=swap"
+        rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 font-sans">
-
+<body>
     <header class="bg-green-600 py-4 px-8 rounded-lg flex justify-between items-center">
         <div class="flex items-center">
             <img src="scripts/logo.png" alt="Logo" class="w-10 mr-2">
             <h1 class="text-white text-lg font-bold">PathProtector Dashboard</h1>
         </div>
-        <div class="flex items-center space-x-4">
-            <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
-                onclick="showPopup()">Add Obstruction</button>
-            <div class="text-white font-semibold">
-                <a href="/logout">Logout</a>
-            </div>
+        <div class="text-white font-bold text-lg">
+            <a href="/logout">Logout</a>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-8">
+    <div id="map" class="h-96"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div id="map" class="h-96 bg-white rounded-lg shadow-md"></div>
+    <div id="obstructionsTable" class="mt-8">
+        <!-- Table will be dynamically populated using JavaScript -->
+    </div>
 
-            <div id="obstructionsTable" class="bg-white rounded-lg shadow-md overflow-hidden">
-                <!-- Table will be dynamically populated using JavaScript -->
-            </div>
-        </div>
+    <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="showPopup()">Add
+        Obstruction</button>
 
-    </main>
-
-    <script src="scripts/createObstruction.js"></script>
-    <script src="scripts/map.js"></script>
-    <script src="scripts/obstructionTable.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgxu1LuvU8yS3qv5f0KsX1PDV1tNX4v8E&callback=initMap" async defer></script>
+    <script src="/scripts/createObstruction.js"></script>
+    <script src="/scripts/map.js"></script>
+    <script src="/scripts/obstructionTable.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgxu1LuvU8yS3qv5f0KsX1PDV1tNX4v8E&callback=initMap" async defer></script>
 </body>
 
 </html>
