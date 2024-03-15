@@ -33,12 +33,13 @@ th {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    border: 3px solid #48bb78;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(102, 153, 0, 0.99); /* Background color similar to login form */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 0.375rem;
+    border: 3px solid #fff;
+    padding: 2rem;
     z-index: 1000;
+    max-width: 28rem; /* Same max-width as the login form */
 }
 
 .input-field {
