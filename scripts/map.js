@@ -5,6 +5,9 @@ function initMap() {
         zoom: 8
     });
 
+    // Initialize an empty info window
+    const infoWindow = new google.maps.InfoWindow();
+
     fetch('/obstructions')
         .then(response => response.json())
         .then(obstructions => {
@@ -14,7 +17,21 @@ function initMap() {
                 const marker = new google.maps.Marker({
                     position: { lat: obstruction.latitude, lng: obstruction.longitude },
                     map: map,
-                    title: obstruction.type // You can set the title to whatever you want to display when the marker is clicked
+                    title: obstruction.type
+                });
+
+                // Add click event listener to each marker
+                marker.addListener('click', () => {
+                    // Set the content of the info window to display the information of the obstruction
+                    infoWindow.setContent(`<div><strong>Type:</strong> ${obstruction.type}</div>
+                                           <div><strong>Date:</strong> ${obstruction.date}</div>
+                                           <div><strong>Trail:</strong> ${obstruction.trail}</div>
+                                           <div><strong>Username:</strong> ${obstruction.username}</div>
+                                           <div><strong>Description:</strong> ${obstruction.description}</div>
+                                           <div><strong>Approval:</strong> ${obstruction.approval ? 'Approved' : 'Pending'}</div>`);
+
+                    // Open the info window at the marker's position
+                    infoWindow.open(map, marker);
                 });
             });
         })
@@ -22,5 +39,3 @@ function initMap() {
             console.error('Error fetching obstructions:', error);
         });
 }
-
-
