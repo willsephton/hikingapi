@@ -36,7 +36,6 @@ function fetchAndDisplayObstructions() {
                 editButton.classList.add('btn', 'btn-blue', 'btn-sm'); // Adding Tailwind CSS classes
                 editButton.onclick = () => {
                     displayEditPopup(obstruction); // Call function to display edit popup with obstruction data
-                    fetchAndDisplayObstructions();
                 };
                 const editCell = document.createElement('td');
                 editCell.appendChild(editButton);
@@ -47,7 +46,6 @@ function fetchAndDisplayObstructions() {
                 deleteButton.classList.add('btn', 'btn-red', 'btn-sm'); // Adding Tailwind CSS classes
                 deleteButton.onclick = () => {
                     deleteObstruction(obstruction.id);
-                    fetchAndDisplayObstructions(); // Call function to delete obstruction
                 };
                 const deleteCell = document.createElement('td');
                 deleteCell.appendChild(deleteButton);
