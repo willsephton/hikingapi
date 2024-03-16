@@ -123,6 +123,8 @@ function submitEditForm(obstructionId) {
     var latitude = document.getElementById('latitude').value;
     var date = document.getElementById('date').value;
     var trail = document.getElementById('trail').value;
+    var username = document.getElementById('username').value; // New field
+    var description = document.getElementById('description').value; // New field
     var approval = document.getElementById('approval').checked;
 
     // Convert date to the desired format
@@ -136,6 +138,8 @@ function submitEditForm(obstructionId) {
         "latitude": latitude,
         "date": formattedDate,
         "trail": trail,
+        "username": username, // Include username in the data object
+        "description": description, // Include description in the data object
         "approval": approval
     };
 

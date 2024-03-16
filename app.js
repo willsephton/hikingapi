@@ -117,10 +117,10 @@ function startServer() {
 
   // Edit an existing obstruction
   app.post('/editObstruction/:id', (req, res) => {
-    const { type, longitude, latitude, date, trail, approval } = req.body;
+    const { type, longitude, latitude, date, trail, approval, username, description } = req.body;
     const id = req.params.id;
-    const sql = 'UPDATE obstructions SET type = ?, longitude = ?, latitude = ?, date = ?, trail = ?, approval = ? WHERE id = ?';
-    db.query(sql, [type, longitude, latitude, date, trail, approval, id], (err, result) => {
+    const sql = 'UPDATE obstructions SET type = ?, longitude = ?, latitude = ?, date = ?, trail = ?, approval = ?, username = ?, description = ? WHERE id = ?';
+    db.query(sql, [type, longitude, latitude, date, trail, approval, username, description, id], (err, result) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
