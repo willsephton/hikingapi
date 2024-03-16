@@ -78,7 +78,7 @@ th {
     cursor: pointer;
     transition: background-color 0.3s ease;
 
-    background-color: #4299e1;
+    background-color: #99CC00;
     color: #ffffff;
     font-weight: bold;
     padding: 0.5rem 1rem;
@@ -86,7 +86,7 @@ th {
 }
 
 .btn:hover {
-    background-color: #3182ce;
+    background-color: #759c00;
 }
 
 /* Responsive Styles */
