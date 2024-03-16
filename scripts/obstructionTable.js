@@ -69,8 +69,8 @@ function formatDate(dateString) {
     const hours = ('0' + date.getHours()).slice(-2);
     const minutes = ('0' + date.getMinutes()).slice(-2);
     const seconds = ('0' + date.getSeconds()).slice(-2);
-    console.log(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}`)
-    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    console.log(`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`)
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
 function displayEditPopup(obstruction) {
