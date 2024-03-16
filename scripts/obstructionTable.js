@@ -76,33 +76,41 @@ function displayEditPopup(obstruction) {
     // Display the edit popup with pre-filled data from the obstruction object
     const popupHtml = `
     <div class="popup-container">
-        <h2 class="popupTitle">Edit Obstruction</h2>
-        <div class="input-field">
-            <label for="type">Type:</label>
-            <input type="text" id="type" name="type" value="${obstruction.type}">
-        </div>
-        <div class="input-field">
-            <label for="longitude">Longitude:</label>
-            <input type="number" id="longitude" name="longitude" value="${obstruction.longitude}">
-        </div>
-        <div class="input-field">
-            <label for="latitude">Latitude:</label>
-            <input type="number" id="latitude" name="latitude" value="${obstruction.latitude}">
-        </div>
-        <div class="input-field">
-            <label for="date">Date:</label>
-            <input type="datetime-local" id="date" name="date" value="${formatDate(obstruction.date)}">
-        </div>
-        <div class="input-field">
-            <label for="trail">Trail:</label>
-            <input type="text" id="trail" name="trail" value="${obstruction.trail}">
-        </div>
-        <div class="input-field">
-            <label for="approval">Approval:</label>
-            <input type="checkbox" id="approval" name="approval" ${obstruction.approval ? 'checked' : ''}>
-        </div>
-        <button class="btn" onclick="submitEditForm(${obstruction.id})">Submit</button>
-        <button class="btn close-btn" onclick="closePopup()">Close</button>
+    <h2 class="popupTitle">Edit Obstruction</h2>
+    <div class="input-field">
+        <label for="type" class="form-label">Type:</label>
+        <input type="text" id="type" name="type" value="${obstruction.type}" class="form-input">
+    </div>
+    <div class="input-field">
+        <label for="longitude" class="form-label">Longitude:</label>
+        <input type="number" id="longitude" name="longitude" value="${obstruction.longitude}" class="form-input">
+    </div>
+    <div class="input-field">
+        <label for="latitude" class="form-label">Latitude:</label>
+        <input type="number" id="latitude" name="latitude" value="${obstruction.latitude}" class="form-input">
+    </div>
+    <div class="input-field">
+        <label for="date" class="form-label">Date:</label>
+        <input type="datetime-local" id="date" name="date" value="${formatDate(obstruction.date)}" class="form-input">
+    </div>
+    <div class="input-field">
+        <label for="trail" class="form-label">Trail:</label>
+        <input type="text" id="trail" name="trail" value="${obstruction.trail}" class="form-input">
+    </div>
+    <div class="input-field">
+        <label for="username" class="form-label">Username:</label>
+        <input type="text" id="username" name="username" value="${obstruction.username}" class="form-input">
+    </div>
+    <div class="input-field">
+        <label for="description" class="form-label">Description:</label>
+        <textarea id="description" name="description" class="form-input">${obstruction.description}</textarea>
+    </div>
+    <div class="input-field">
+        <label for="approval" class="form-label">Approval:</label>
+        <input type="checkbox" id="approval" name="approval" ${obstruction.approval ? 'checked' : ''} class="form-checkbox">
+    </div>
+        <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" onclick="submitEditForm(${obstruction.id})">Submit</button>
+        <button class="btn bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded close-btn" onclick="closePopup()">Close</button>
     </div>`;
     document.body.insertAdjacentHTML('beforeend', popupHtml);
 }
