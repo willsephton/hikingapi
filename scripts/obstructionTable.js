@@ -10,6 +10,13 @@ function fetchAndDisplayObstructions() {
                 th.textContent = capitalizeFirstLetter(header); // Capitalize the first letter of the header
                 headerRow.appendChild(th);
             });
+            // Add headers for edit and delete buttons
+            const editHeader = document.createElement('th');
+            editHeader.textContent = '';
+            headerRow.appendChild(editHeader);
+            const deleteHeader = document.createElement('th');
+            deleteHeader.textContent = '';
+            headerRow.appendChild(deleteHeader);
             table.appendChild(headerRow);
 
             obstructions.forEach(obstruction => {
