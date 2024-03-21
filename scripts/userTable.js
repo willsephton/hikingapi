@@ -12,10 +12,10 @@ function fetchAndDisplayUsers() {
             });
             // Add headers for edit and delete buttons
             const editHeader = document.createElement('th');
-            editHeader.textContent = 'Edit';
+            editHeader.textContent = '';
             headerRow.appendChild(editHeader);
             const deleteHeader = document.createElement('th');
-            deleteHeader.textContent = 'Delete';
+            deleteHeader.textContent = '';
             headerRow.appendChild(deleteHeader);
             table.appendChild(headerRow);
 
