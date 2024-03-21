@@ -157,6 +157,9 @@ function submitEditForm(obstructionId) {
             alert('Obstruction updated successfully!');
             // Close the popup after submitting the form
             document.querySelector('.popup-container').remove();
+            // Refresh the obstructions table after deletion
+            document.getElementById('obstructionsTable').innerHTML = '';
+            fetchAndDisplayObstructions();
         } else {
             throw new Error('Failed to update obstruction');
         }
