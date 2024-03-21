@@ -90,6 +90,10 @@ function startServer() {
     res.render('index');
   });
 
+  app.get('/usersPage', requireAdmin, (req, res) => {
+    res.render('users');
+  });
+
   // Get all obstructions
   app.get('/obstructions', (req, res) => {
     const sql = 'SELECT * FROM obstructions';
@@ -317,6 +321,46 @@ app.delete('/deleteUser/:id', (req, res) => {
     res.json({ message: 'User deleted successfully' });
   });
 });
+
+// Edit an existing User
+app.post('/editUser/:id', async (req, res) => {
+  const { username, password, admin } = req.body;
+  const id = req.params.id;
+
+  try {
+    // Check if the user exists
+    const checkUserQuery = 'SELECT * FROM users WHERE id = ?';
+    db.query(checkUserQuery, [id], async (err, results) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+
+      if (results.length === 0) {
+        res.status(404).json({ error: 'User not found' });
+        return;
+      }
+
+      // Generate a salt
+      const salt = await bcrypt.genSalt(10);
+      // Hash the password using the salt
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      // Update user data
+      const updateUserQuery = 'UPDATE users SET username = ?, password = ?, admin = ? WHERE id = ?';
+      db.query(updateUserQuery, [username, hashedPassword, admin || false, id], (err, result) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+        }
+        res.json({ message: 'User updated successfully', id: id });
+      });
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // Find a user by username
 app.get('/user/:username', (req, res) => {
