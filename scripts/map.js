@@ -31,6 +31,7 @@ function initMap() {
                                            <div><strong>Trail:</strong> ${obstruction.trail}</div>
                                            <div><strong>Username:</strong> ${obstruction.username}</div>
                                            <div><strong>Description:</strong> ${obstruction.description}</div>
+                                           <div><strong>Severity:</strong> ${obstruction.severity}</div>
                                            <div><strong>Approval:</strong> ${obstruction.approval ? 'Approved' : 'Pending'}</div>`);
 
                     // Open the info window at the marker's position

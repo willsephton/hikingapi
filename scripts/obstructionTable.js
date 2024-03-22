@@ -107,6 +107,10 @@ function displayEditPopup(obstruction) {
         <textarea id="description" name="description" class="form-input">${obstruction.description}</textarea>
     </div>
     <div class="input-field">
+        <label for="severity" class="form-label">Severity:</label>
+            <textarea id="severity" name="severity" class="form-input">${obstruction.severity}</textarea>
+    </div>
+    <div class="input-field">
         <label for="approval" class="form-label">Approval:</label>
         <input type="checkbox" id="approval" name="approval" ${obstruction.approval ? 'checked' : ''} class="form-checkbox">
     </div>
@@ -126,6 +130,7 @@ function submitEditForm(obstructionId) {
     var trail = document.getElementById('trail').value;
     var username = document.getElementById('username').value; // New field
     var description = document.getElementById('description').value; // New field
+    var severity = document.getElementById('severity').value; // New field
     var approval = document.getElementById('approval').checked;
 
     // Convert date to the desired format
@@ -141,6 +146,7 @@ function submitEditForm(obstructionId) {
         "trail": trail,
         "username": username, // Include username in the data object
         "description": description, // Include description in the data object
+        "severity": severity,
         "approval": approval
     };
 
