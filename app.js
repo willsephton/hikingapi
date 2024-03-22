@@ -109,7 +109,7 @@ function startServer() {
   // Create a new obstruction
   app.post('/createObstruction', (req, res) => {
     const { type, longitude, latitude, date, trail, approval, username, description } = req.body;
-    const sql = 'INSERT INTO obstructions (type, longitude, latitude, date, trail, approval, username, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    const sql = 'INSERT INTO obstructions (type, longitude, latitude, date, trail, approval, username, description, severity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
     db.query(sql, [type, longitude, latitude, date, trail, approval, username, description], (err, result) => {
       if (err) {
         res.status(500).json({ error: err.message });
@@ -121,10 +121,10 @@ function startServer() {
 
   // Edit an existing obstruction
   app.post('/editObstruction/:id', (req, res) => {
-    const { type, longitude, latitude, date, trail, approval, username, description } = req.body;
+    const { type, longitude, latitude, date, trail, approval, username, description, severity } = req.body;
     const id = req.params.id;
-    const sql = 'UPDATE obstructions SET type = ?, longitude = ?, latitude = ?, date = ?, trail = ?, approval = ?, username = ?, description = ? WHERE id = ?';
-    db.query(sql, [type, longitude, latitude, date, trail, approval, username, description, id], (err, result) => {
+    const sql = 'UPDATE obstructions SET type = ?, longitude = ?, latitude = ?, date = ?, trail = ?, approval = ?, username = ?, description = ?, severity = ? WHERE id = ?';
+    db.query(sql, [type, longitude, latitude, date, trail, approval, username, description, severity, id], (err, result) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
@@ -167,7 +167,8 @@ function startServer() {
         trail VARCHAR(255) NOT NULL,
         approval BOOLEAN DEFAULT false,
         username VARCHAR(255) NOT NULL,
-        description VARCHAR(255) NOT NULL
+        description VARCHAR(255) NOT NULL,
+        severity VARCHAR(255) NOT NULL
       )
     `;
 

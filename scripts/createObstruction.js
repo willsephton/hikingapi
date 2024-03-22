@@ -34,6 +34,10 @@ function showPopup() {
             <label for="description">Description:</label>
             <textarea id="description" name="description"></textarea>
         </div>
+        <div class="input-field">
+            <label for="severity">Severity:</label>
+            <textarea id="severity" name="severity"></textarea>
+        </div>
         <button class="btn" onclick="submitForm()">Submit</button>
         <button class="btn close-btn" onclick="closePopup()">Close</button>
     </div>`;
@@ -55,6 +59,7 @@ function submitForm() {
     var approval = document.getElementById('approval').checked; // Get checkbox value
     var username = document.getElementById('username').value;
     var description = document.getElementById('description').value;
+    var severity = document.getElementById('severity').value;
 
     // Construct JSON object
     var data = {
@@ -65,7 +70,8 @@ function submitForm() {
         "trail": trail,
         "approval": approval,
         "username": username,
-        "description": description
+        "description": description,
+        "severity": severity
     };
 
     // Send POST request
