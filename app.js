@@ -108,9 +108,9 @@ function startServer() {
 
   // Create a new obstruction
   app.post('/createObstruction', (req, res) => {
-    const { type, longitude, latitude, date, trail, approval, username, description } = req.body;
+    const { type, longitude, latitude, date, trail, approval, username, description, severity } = req.body;
     const sql = 'INSERT INTO obstructions (type, longitude, latitude, date, trail, approval, username, description, severity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    db.query(sql, [type, longitude, latitude, date, trail, approval, username, description], (err, result) => {
+    db.query(sql, [type, longitude, latitude, date, trail, approval, username, description, severity], (err, result) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
